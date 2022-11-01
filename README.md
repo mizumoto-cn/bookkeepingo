@@ -17,8 +17,11 @@ A cloud bookkeeping ware. **--Development in progress--**
 │   │   └── service
 │   └── bar
 │       └── interface
+├── configs  // kratos configs
+├── internal  // internal packages which are not exposed to other projects
 ├── pkg  // common used packages
 ├── deploy  // dockerfile and deployment scripts
+├── third_party  // third party packages
 ├── web  // web frontend files
 └── docs // documents
 ```
