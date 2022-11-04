@@ -17,11 +17,16 @@ A cloud bookkeeping ware. **--Development in progress--**
 │   │   └── service
 │   └── bar
 │       └── interface
-├── configs  // kratos configs
+├── configs  // static kratos configs
 ├── internal  // internal packages which are not exposed to other projects
+│   ├── biz // business logic
+│   ├── conf // config for applications in protobuf format, after compiled, it will be used to help business logic to read config
+│   ├── data // data access of database/redis-cache or other data sources including lower-stream data interfaces
+│   ├── server // server defines the application-layer protocol
+│   └── service // service is for the implementation of the apis
 ├── pkg  // common used packages
 ├── deploy  // dockerfile and deployment scripts
-├── third_party  // third party packages
+├── third_party  // proto files for third party services
 ├── web  // web frontend files
 └── docs // documents
 ```

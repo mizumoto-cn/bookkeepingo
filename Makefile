@@ -3,9 +3,9 @@ GOPATH:=$(shell go env GOPATH)
 VERSION=$(shell git describe --tags --always)
 
 ifeq ($(GOHOSTOS), windows)
-	#the `find.exe` is different from `find` in bash/shell.
-	#to see https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/find.
-	#changed to use git-bash.exe to run find cli or other cli friendly, caused of every developer has a Git.
+#	the `find.exe` is different from `find` in bash/shell.
+#	to see https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/find.
+#	changed to use git-bash.exe to run find cli or other cli friendly, caused of every developer has a Git.
 	Git_Bash= $(subst cmd\,bin\bash.exe,$(dir $(shell where git)))
 	INTERNAL_PROTO_FILES=$(shell $(Git_Bash) -c "find internal -name *.proto")
 	API_PROTO_FILES=$(shell $(Git_Bash) -c "find api -name *.proto")
@@ -80,3 +80,11 @@ help:
 	{ lastLine = $$0 }' $(MAKEFILE_LIST)
 
 .DEFAULT_GOAL := help
+
+.PHONY: set-env
+set-env:
+	docker-compose -f docker-compose.yaml up -d
+
+.PHONY: clean-env
+clean-env:
+	docker-compose -f docker-compose.yaml down
