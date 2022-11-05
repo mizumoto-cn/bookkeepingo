@@ -3,37 +3,68 @@
 
 openapi: 3.0.3
 info:
-    title: Greeter API
-    description: The greeting service definition.
+    title: AccountService API
     version: 0.0.1
 paths:
-    /helloworld/{name}:
-        get:
+    /account/login:
+        post:
             tags:
-                - Greeter
-                - subgroup
-            description: Sends a greeting
-            operationId: Greeter_SayHello
-            parameters:
-                - name: name
-                  in: path
-                  required: true
-                  schema:
-                    type: string
+                - AccountService
+            operationId: AccountService_Login
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/bookkeepingo.mizumoto.cn.account.v1.LoginRequest'
+                required: true
             responses:
                 "200":
                     description: OK
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.HelloReply'
+                                $ref: '#/components/schemas/bookkeepingo.mizumoto.cn.account.v1.LoginResponse'
+    /account/register:
+        post:
+            tags:
+                - AccountService
+            operationId: AccountService_Register
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/bookkeepingo.mizumoto.cn.account.v1.RegisterRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/bookkeepingo.mizumoto.cn.account.v1.RegisterResponse'
 components:
     schemas:
-        helloworld.v1.HelloReply:
+        bookkeepingo.mizumoto.cn.account.v1.LoginRequest:
             type: object
             properties:
-                message:
+                mail:
                     type: string
-            description: The response message containing the greetings
+                password:
+                    type: string
+        bookkeepingo.mizumoto.cn.account.v1.LoginResponse:
+            type: object
+            properties:
+                token:
+                    type: string
+        bookkeepingo.mizumoto.cn.account.v1.RegisterRequest:
+            type: object
+            properties:
+                mail:
+                    type: string
+                password:
+                    type: string
+        bookkeepingo.mizumoto.cn.account.v1.RegisterResponse:
+            type: object
+            properties: {}
 tags:
-    - name: Greeter
+    - name: AccountService

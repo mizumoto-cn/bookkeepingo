@@ -19,6 +19,6 @@ services:
       - "8080:8080"
     image: swaggerapi/swagger-ui
     volumes:
-      - ${PWD}:/data
+      - .:/data
     environment:
       SWAGGER_JSON: /data/openapi.yaml
