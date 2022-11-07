@@ -5,9 +5,15 @@ option go_package = "bookkeepingo/internal/conf;conf";
 
 import "google/protobuf/duration.proto";
 
+message Auth {
+  string jwt_secret = 1;
+  google.protobuf.Duration jwt_expire_duration = 2;
+}
+
 message Bootstrap {
   Server server = 1;
   Data data = 2;
+  Auth auth = 3;
 }
 
 message Server {

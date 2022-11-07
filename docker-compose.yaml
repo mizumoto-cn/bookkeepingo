@@ -9,6 +9,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: test
+    volumes:
+      - ./dbdata:/var/lib/mysql
   redis:
     image: redis
     restart: always

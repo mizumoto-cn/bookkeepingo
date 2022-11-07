@@ -8,7 +8,7 @@ VERSION=$(shell git describe --tags --always)
 
 ifeq ($(GOHOSTOS), windows)
 	Git_Bash= "$(subst cmd\,bin\bash.exe,$(dir $(shell where git)))"
-	INTERNAL_PROTO_FILES=$(shell '$(Git_Bash)' -c "find internal -name *.proto")
+	INTERNAL_PROTO_FILES=$(shell $(Git_Bash) -c "find internal -name *.proto")
 	API_PROTO_FILES=$(shell $(Git_Bash) -c "find api -name *.proto")
 else
 	INTERNAL_PROTO_FILES=$(shell find internal -name *.proto)
@@ -94,3 +94,4 @@ clean-env:
 test-bash:
 	echo $(Git_Bash)
 	echo $(API_PROTO_FILES)
+	echo $(INTERNAL_PROTO_FILES)
