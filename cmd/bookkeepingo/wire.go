@@ -6,11 +6,11 @@
 package main
 
 import (
-	"bookkeepingo/internal/biz"
-	"bookkeepingo/internal/conf"
-	"bookkeepingo/internal/data"
-	"bookkeepingo/internal/server"
-	"bookkeepingo/internal/service"
+	"github.com/mizumoto-cn/bookkeepingo/internal/biz"
+	"github.com/mizumoto-cn/bookkeepingo/internal/conf"
+	"github.com/mizumoto-cn/bookkeepingo/internal/data"
+	"github.com/mizumoto-cn/bookkeepingo/internal/server"
+	"github.com/mizumoto-cn/bookkeepingo/internal/service"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
