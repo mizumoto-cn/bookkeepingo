@@ -9,8 +9,10 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/go-kratos/kratos/v2/log"
+	"github.com/golang-jwt/jwt/v4"
 )
 
 type User struct {
@@ -26,10 +28,10 @@ type User struct {
 type UserRepo interface {
 	// FetchByUserMail fetch user by user mail address
 	// return nil, ErrUserNotFound if not found
-	FetchByUserMail(ctx context.Context, userMail string) (*user, error)
+	FetchByUserMail(ctx context.Context, userMail string) (*User, error)
 
 	// Save saves user info and returns the ID of the saved user
-	Save(ctx context.Context, user *user) (int64, error)
+	Save(ctx context.Context, user *User) (int64, error)
 }
 
 type AccountUsecase struct {
@@ -82,3 +84,32 @@ func (uc *AccountUsecase) Register(ctx context.Context, userMail, password strin
 }
 
 // TODO: Login
+
+// AccountUsecase.Login returns a token or error if login failed.
+func (uc *AccountUsecase) Login(ctx context.Context, userMail, password string) (string, error) {
+	if userMail == "" || password == "" {
+		return "", fmt.Errorf("invalid user mail or password: %w", ErrInvalidParam)
+	}
+	// check if user mail exists
+	user, err := uc.userRepo.FetchByUserMail(ctx, userMail)
+	if err != nil {
+		log.Errorf("Login failed,[userMail: %s], err: %v", userMail, err)
+		return "", fmt.Errorf("Login failed: %w", err)
+	}
+	// check password
+	err = uc.encryptionService.Compare(ctx, []byte(password), []byte(user.PassWord))
+	if err != nil {
+		log.Errorf("Login failed,[userMail: %s], err: %v", userMail, err)
+		return "", fmt.Errorf("Login failed: %w", err)
+	}
+	// generate jwt token
+	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.RegisteredClaims{
+		ExpiresAt: jwt.NewNumericDate(time.Now().Add(uc.authConfig.GetExpireDuration())),
+	})
+	token, err := claims.SignedString([]byte(uc.authConfig.GetJwtSecret()))
+	if err != nil {
+		log.Errorf("Login token creation failed,[userMail: %s], err: %v", userMail, err)
+		return "", fmt.Errorf("Login failed: %w", err)
+	}
+	return token, nil
+}

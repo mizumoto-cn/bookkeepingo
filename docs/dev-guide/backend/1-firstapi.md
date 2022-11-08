@@ -86,3 +86,11 @@ auth:
 ### `biz` Level Business Implementation
 
 目前推荐使用贫血模型，只包含不依赖持久层的业务逻辑。依赖于持久层的业务逻辑将会被放到服务层中。因而贫血模型中的领域对象是不依赖于持久层的。
+
+### `data` Level Data Access Implementation
+
+被操作的实体是定义在biz层的，但是按照kratos的设计，存储到数据库的实体应该是data层自己定义的，data层应该要做一次ACl，即防腐层处理。不过有时候最优的未必是最好的，这里业务本身并不复杂，编码就没必要搞复杂，这里就一把梭了。
+
+### API Interface Implementation - http & grpc
+
+`internal/service/v1/account.go`
