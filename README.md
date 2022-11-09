@@ -2,6 +2,8 @@
 
 A cloud bookkeeping ware. **--Development in progress--**
 
+![work time](https://wakatime.com/badge/user/29d180ce-15fa-4656-8a52-64d706899e5d/project/0dcb4b23-3cd0-4a54-a383-7f58db6716f8.svg?style=default)
+
 ## Architecture
 
 ```bullshit
@@ -43,4 +45,4 @@ Developed with [Vue.js](https://vuejs.org/) in [typescript](https://www.typescri
 
 ## License
 
-Proudly governed by the [Mizumoto General Public License](./Mizumoto%20General%20Public%20License%20v1.2.md), a license based on Mozilla Public License 2.0 with extra restrictions.
+Proudly governed by the [Mizumoto General Public License](./LICENSE.md), a license based on Mozilla Public License 2.0 with extra restrictions.

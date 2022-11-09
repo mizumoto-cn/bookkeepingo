@@ -56,6 +56,11 @@ components:
             properties:
                 token:
                     type: string
+                ok:
+                    type: boolean
+                id:
+                    type: integer
+                    format: int64
         bookkeepingo.mizumoto.cn.account.v1.RegisterRequest:
             type: object
             properties:

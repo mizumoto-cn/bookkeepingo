@@ -24,3 +24,15 @@ services:
       - .:/data
     environment:
       SWAGGER_JSON: /data/openapi.yaml
+  consul:
+    image: consul
+    restart: always
+    ports:
+      - "8500:8500"
+      - "8300:8300"
+      - "8301:8301"
+      - "8302:8302"
+      - "8600:8600/udp"
+    volumes:
+      - ./consuldata:/consul/data
+    command: "agent -dev -client=0.0.0.0"
