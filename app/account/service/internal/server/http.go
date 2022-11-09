@@ -1,9 +1,8 @@
 package server
 
 import (
-	v1 "github.com/mizumoto-cn/bookkeepingo/api/account/v1"
+	v1 "github.com/mizumoto-cn/bookkeepingo/api/account/service/v1"
 	"github.com/mizumoto-cn/bookkeepingo/app/account/service/internal/conf"
-	"github.com/mizumoto-cn/bookkeepingo/app/account/service/internal/service"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
@@ -11,7 +10,7 @@ import (
 )
 
 // NewHTTPServer new a HTTP server.
-func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, logger log.Logger) *http.Server {
+func NewHTTPServer(c *conf.Server, logger log.Logger, ass v1.AccountServiceServer) *http.Server {
 	var opts = []http.ServerOption{
 		http.Middleware(
 			recovery.Recovery(),
@@ -27,6 +26,6 @@ func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, logger log.L
 		opts = append(opts, http.Timeout(c.Http.Timeout.AsDuration()))
 	}
 	srv := http.NewServer(opts...)
-	v1.RegisterGreeterHTTPServer(srv, greeter)
+	v1.RegisterAccountServiceHTTPServer(srv, ass)
 	return srv
 }

@@ -35,6 +35,12 @@ type UserRepo interface {
 	Save(ctx context.Context, user *User) (int64, error)
 }
 
+type EncryptionService struct{}
+
+func NewEncryptionService() *EncryptionService {
+	return &EncryptionService{}
+}
+
 type AccountUsecase struct {
 	authConfig        *conf.Auth
 	encryptionService EncryptionService // TODO: encryption service
@@ -73,7 +79,7 @@ func (uc *AccountUsecase) Register(ctx context.Context, userMail, password strin
 		log.Errorf("Registration failed,[userMail: %s, pwd: %s], err: %v", userMail, password, err)
 		return fmt.Errorf("Registration failed: %w", err)
 	}
-	_, err = uc.userRepo.Save(ctx, &user{
+	_, err = uc.userRepo.Save(ctx, &User{
 		UserMail: userMail,
 		PassWord: string(encryptedPassword),
 	})
@@ -105,7 +111,7 @@ func (uc *AccountUsecase) Login(ctx context.Context, userMail, password string) 
 	}
 	// generate jwt token
 	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.RegisteredClaims{
-		ExpiresAt: jwt.NewNumericDate(time.Now().Add(uc.authConfig.GetExpireDuration())),
+		ExpiresAt: jwt.NewNumericDate(time.Now().Add(uc.authConfig.GetJwtExpireDuration().AsDuration())),
 	})
 	token, err := claims.SignedString([]byte(uc.authConfig.GetJwtSecret()))
 	if err != nil {
