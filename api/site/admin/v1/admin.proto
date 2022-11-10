@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package shop.interface.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/mizumoto-cn/bookkeepingo/api/site/admin/v1;adminv1";
+
+service SiteAdminService {
+    rpc Login (LoginReq) returns (LoginResp) {
+        option (google.api.http) = {
+            post: "/v1/login"
+            body: "*"
+        };
+    }
+
+    rpc Logout (LogoutReq) returns (LogoutResp) {
+        option (google.api.http) = {
+            post: "/v1/logout"
+            body: "*"
+        };
+    }
+
+    rpc ListAccount (ListAccountReq) returns (ListAccountResp) {
+        option (google.api.http) = {
+            get: "/v1/accounts"
+        };
+    }
+
+    rpc GetAccount (GetAccountReq) returns (GetAccountResp) {
+        option (google.api.http) = {
+            get: "/v1/accounts/{id}"
+        };
+    }
+}
+
+message RegisterReq {
+    string accountname = 1;
+    string password = 2;
+}
+
+message RegisterResp {
+    int64 id = 1;
+}
+
+message LoginReq {
+    string accountname = 1;
+    string password = 2;
+}
+
+message LoginResp {
+    string token = 1;
+}
+
+message LogoutReq {
+
+}
+
+message LogoutResp {
+
+}
+
+message GetAccountReq {
+    int64 id = 1;
+}
+
+message GetAccountResp {
+    int64 id = 1;
+    string accountname = 2;
+}
+
+
+message ListAccountReq {
+
+}
+
+message ListAccountResp {
+
+}
+
+message CreateAccountReq {
+    string accountname = 1;
+    string password = 2;
+}
+
+message CreateAccountResp {
+    int64 id = 1;
+    string accountname = 2;
+}
+
+message VerifyPasswordReq {
+    string accountname = 1;
+    string password = 2;
+}
+
+message VerifyPasswordResp {
+    bool ok = 1;
+    int64 id = 2;
+}

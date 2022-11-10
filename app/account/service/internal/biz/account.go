@@ -53,6 +53,6 @@ func NewAccountUsecase(authConfig *conf.Auth, accountRepo AccountRepo, logger lo
 	return &AccountUsecase{
 		// authConfig:  authConfig,
 		accountRepo: accountRepo,
-		logger:      log.NewHelper(log.With(logger, "module", "account/usecase/account")),
+		logger:      log.NewHelper(log.With(logger, "module", "account-service/usecase/account")),
 	}
 }

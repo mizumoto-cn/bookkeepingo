@@ -20,8 +20,11 @@ create table account
     id       int(64) not null auto_increment,
     accountmail varchar(64)  not null,
     password varchar(128) not null,
+    created_at timestamp default CURRENT_TIMESTAMP,
+    updated_at timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
     phone    varchar(18),
     nickname varchar(20),
+    deleted boolean default false,
     PRIMARY KEY (id)
 ) engine=innodb default charset=utf8mb4;
 ```
