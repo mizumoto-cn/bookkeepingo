@@ -15,10 +15,10 @@ run `make set-env` to set the container environment.
 ```sql
 create DATABASE account;
 use account;
-create table user
+create table account
 (
     id       int(64) not null auto_increment,
-    username varchar(64)  not null,
+    accountmail varchar(64)  not null,
     password varchar(128) not null,
     phone    varchar(18),
     nickname varchar(20),
@@ -89,7 +89,21 @@ auth:
 
 ### `data` Level Data Access Implementation
 
-被操作的实体是定义在biz层的，但是按照kratos的设计，存储到数据库的实体应该是data层自己定义的，data层应该要做一次ACl，即防腐层处理。不过有时候最优的未必是最好的，这里业务本身并不复杂，编码就没必要搞复杂，这里就一把梭了。
+被操作的实体是定义在biz层的，但是按照kratos的设计，存储到数据库的实体应该是data层自己定义的
+
+#### Switch to `ent`
+
+Install
+
+```bash
+go install entgo.io/ent/cmd/ent@latest
+```
+
+Generate
+
+```bash
+ent init Account
+```
 
 ### API Interface Implementation - http & grpc
 

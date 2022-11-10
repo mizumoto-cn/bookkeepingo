@@ -4,17 +4,17 @@ package data
 
 import (
 	"github.com/mizumoto-cn/bookkeepingo/app/account/service/internal/conf"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-redis/redis/extra/redisotel"
 	"github.com/go-redis/redis/v8"
 	"github.com/google/wire"
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
 )
 
 // ProviderSet is data providers.
-var ProviderSet = wire.NewSet(NewData, NewUserRepo)
+var ProviderSet = wire.NewSet(NewData, NewAccountRepo)
 
 // Data .
 type Data struct {
