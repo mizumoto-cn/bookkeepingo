@@ -5,7 +5,6 @@ import (
 	"errors"
 
 	v1 "github.com/mizumoto-cn/bookkeepingo/api/account/service/v1"
-	"github.com/mizumoto-cn/bookkeepingo/app/account/service/internal/conf"
 
 	jwt "github.com/golang-jwt/jwt/v4"
 )
@@ -26,15 +25,15 @@ func NewAuthUsecase(authConfig *conf.Auth, accRepo AccountRepo) *AuthUsecase {
 	}
 }
 
-func (au *AuthUsecase) Login(ctx context.Context, req *v1.LoginRequest) (*v1.LoginReply, error) {
+func (au *AuthUsecase) Login(ctx context.Context, req *v1.LoginRequest) (*v1.LoginResponse, error) {
 	// get account info
-	acc, err := au.accRepo.FetchByAccountMail(ctx, req.AccountMail)
+	acc, err := au.accRepo.FetchByAccountMail(ctx, req.Mail)
 	if err != nil {
 		return nil, v1.ErrorLoginFailed("login failed, mail not found, %s", err.Error())
 	}
 
 	// check permission (password/blacklist ...etc)
-	err = au.accRepo.VerifyPassword(ctx, acc, req.Password)
+	err = au.accRepo.VerifyPassword(ctx, acc)
 	if err != nil {
 		return nil, v1.ErrorLoginFailed("login failed, password not match, %s", err.Error())
 	}

@@ -22,8 +22,13 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AccountServiceClient interface {
-	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
-	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
+	FetchAccountByAccountMail(ctx context.Context, in *FetchAccountByAccountMailRequest, opts ...grpc.CallOption) (*FetchAccountByAccountMailResponse, error)
+	FetchAccountByID(ctx context.Context, in *FetchAccountByIDRequest, opts ...grpc.CallOption) (*FetchAccountByIDResponse, error)
+	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error)
+	SaveAccount(ctx context.Context, in *SaveAccountRequest, opts ...grpc.CallOption) (*SaveAccountResponse, error)
+	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error)
+	ListAccount(ctx context.Context, in *ListAccountRequest, opts ...grpc.CallOption) (*ListAccountResponse, error)
+	VerifyPassword(ctx context.Context, in *VerifyPasswordRequest, opts ...grpc.CallOption) (*VerifyPasswordResponse, error)
 }
 
 type accountServiceClient struct {
@@ -34,18 +39,63 @@ func NewAccountServiceClient(cc grpc.ClientConnInterface) AccountServiceClient {
 	return &accountServiceClient{cc}
 }
 
-func (c *accountServiceClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
-	out := new(LoginResponse)
-	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.cn.account.v1.AccountService/Login", in, out, opts...)
+func (c *accountServiceClient) FetchAccountByAccountMail(ctx context.Context, in *FetchAccountByAccountMailRequest, opts ...grpc.CallOption) (*FetchAccountByAccountMailResponse, error) {
+	out := new(FetchAccountByAccountMailResponse)
+	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.cn.account.v1.AccountService/FetchAccountByAccountMail", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error) {
-	out := new(RegisterResponse)
-	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.cn.account.v1.AccountService/Register", in, out, opts...)
+func (c *accountServiceClient) FetchAccountByID(ctx context.Context, in *FetchAccountByIDRequest, opts ...grpc.CallOption) (*FetchAccountByIDResponse, error) {
+	out := new(FetchAccountByIDResponse)
+	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.cn.account.v1.AccountService/FetchAccountByID", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountServiceClient) CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error) {
+	out := new(CreateAccountResponse)
+	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.cn.account.v1.AccountService/CreateAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountServiceClient) SaveAccount(ctx context.Context, in *SaveAccountRequest, opts ...grpc.CallOption) (*SaveAccountResponse, error) {
+	out := new(SaveAccountResponse)
+	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.cn.account.v1.AccountService/SaveAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountServiceClient) DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error) {
+	out := new(DeleteAccountResponse)
+	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.cn.account.v1.AccountService/DeleteAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountServiceClient) ListAccount(ctx context.Context, in *ListAccountRequest, opts ...grpc.CallOption) (*ListAccountResponse, error) {
+	out := new(ListAccountResponse)
+	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.cn.account.v1.AccountService/ListAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountServiceClient) VerifyPassword(ctx context.Context, in *VerifyPasswordRequest, opts ...grpc.CallOption) (*VerifyPasswordResponse, error) {
+	out := new(VerifyPasswordResponse)
+	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.cn.account.v1.AccountService/VerifyPassword", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -56,8 +106,13 @@ func (c *accountServiceClient) Register(ctx context.Context, in *RegisterRequest
 // All implementations must embed UnimplementedAccountServiceServer
 // for forward compatibility
 type AccountServiceServer interface {
-	Login(context.Context, *LoginRequest) (*LoginResponse, error)
-	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
+	FetchAccountByAccountMail(context.Context, *FetchAccountByAccountMailRequest) (*FetchAccountByAccountMailResponse, error)
+	FetchAccountByID(context.Context, *FetchAccountByIDRequest) (*FetchAccountByIDResponse, error)
+	CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error)
+	SaveAccount(context.Context, *SaveAccountRequest) (*SaveAccountResponse, error)
+	DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error)
+	ListAccount(context.Context, *ListAccountRequest) (*ListAccountResponse, error)
+	VerifyPassword(context.Context, *VerifyPasswordRequest) (*VerifyPasswordResponse, error)
 	mustEmbedUnimplementedAccountServiceServer()
 }
 
@@ -65,11 +120,26 @@ type AccountServiceServer interface {
 type UnimplementedAccountServiceServer struct {
 }
 
-func (UnimplementedAccountServiceServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+func (UnimplementedAccountServiceServer) FetchAccountByAccountMail(context.Context, *FetchAccountByAccountMailRequest) (*FetchAccountByAccountMailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FetchAccountByAccountMail not implemented")
 }
-func (UnimplementedAccountServiceServer) Register(context.Context, *RegisterRequest) (*RegisterResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
+func (UnimplementedAccountServiceServer) FetchAccountByID(context.Context, *FetchAccountByIDRequest) (*FetchAccountByIDResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FetchAccountByID not implemented")
+}
+func (UnimplementedAccountServiceServer) CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAccount not implemented")
+}
+func (UnimplementedAccountServiceServer) SaveAccount(context.Context, *SaveAccountRequest) (*SaveAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SaveAccount not implemented")
+}
+func (UnimplementedAccountServiceServer) DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccount not implemented")
+}
+func (UnimplementedAccountServiceServer) ListAccount(context.Context, *ListAccountRequest) (*ListAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccount not implemented")
+}
+func (UnimplementedAccountServiceServer) VerifyPassword(context.Context, *VerifyPasswordRequest) (*VerifyPasswordResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyPassword not implemented")
 }
 func (UnimplementedAccountServiceServer) mustEmbedUnimplementedAccountServiceServer() {}
 
@@ -84,38 +154,128 @@ func RegisterAccountServiceServer(s grpc.ServiceRegistrar, srv AccountServiceSer
 	s.RegisterService(&AccountService_ServiceDesc, srv)
 }
 
-func _AccountService_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LoginRequest)
+func _AccountService_FetchAccountByAccountMail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FetchAccountByAccountMailRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).Login(ctx, in)
+		return srv.(AccountServiceServer).FetchAccountByAccountMail(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/bookkeepingo.mizumoto.cn.account.v1.AccountService/Login",
+		FullMethod: "/bookkeepingo.mizumoto.cn.account.v1.AccountService/FetchAccountByAccountMail",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).Login(ctx, req.(*LoginRequest))
+		return srv.(AccountServiceServer).FetchAccountByAccountMail(ctx, req.(*FetchAccountByAccountMailRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RegisterRequest)
+func _AccountService_FetchAccountByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FetchAccountByIDRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).Register(ctx, in)
+		return srv.(AccountServiceServer).FetchAccountByID(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/bookkeepingo.mizumoto.cn.account.v1.AccountService/Register",
+		FullMethod: "/bookkeepingo.mizumoto.cn.account.v1.AccountService/FetchAccountByID",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).Register(ctx, req.(*RegisterRequest))
+		return srv.(AccountServiceServer).FetchAccountByID(ctx, req.(*FetchAccountByIDRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountService_CreateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).CreateAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/bookkeepingo.mizumoto.cn.account.v1.AccountService/CreateAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).CreateAccount(ctx, req.(*CreateAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountService_SaveAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SaveAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).SaveAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/bookkeepingo.mizumoto.cn.account.v1.AccountService/SaveAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).SaveAccount(ctx, req.(*SaveAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountService_DeleteAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).DeleteAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/bookkeepingo.mizumoto.cn.account.v1.AccountService/DeleteAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).DeleteAccount(ctx, req.(*DeleteAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountService_ListAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).ListAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/bookkeepingo.mizumoto.cn.account.v1.AccountService/ListAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).ListAccount(ctx, req.(*ListAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountService_VerifyPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VerifyPasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServiceServer).VerifyPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/bookkeepingo.mizumoto.cn.account.v1.AccountService/VerifyPassword",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServiceServer).VerifyPassword(ctx, req.(*VerifyPasswordRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -128,12 +288,32 @@ var AccountService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*AccountServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Login",
-			Handler:    _AccountService_Login_Handler,
+			MethodName: "FetchAccountByAccountMail",
+			Handler:    _AccountService_FetchAccountByAccountMail_Handler,
 		},
 		{
-			MethodName: "Register",
-			Handler:    _AccountService_Register_Handler,
+			MethodName: "FetchAccountByID",
+			Handler:    _AccountService_FetchAccountByID_Handler,
+		},
+		{
+			MethodName: "CreateAccount",
+			Handler:    _AccountService_CreateAccount_Handler,
+		},
+		{
+			MethodName: "SaveAccount",
+			Handler:    _AccountService_SaveAccount_Handler,
+		},
+		{
+			MethodName: "DeleteAccount",
+			Handler:    _AccountService_DeleteAccount_Handler,
+		},
+		{
+			MethodName: "ListAccount",
+			Handler:    _AccountService_ListAccount_Handler,
+		},
+		{
+			MethodName: "VerifyPassword",
+			Handler:    _AccountService_VerifyPassword_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

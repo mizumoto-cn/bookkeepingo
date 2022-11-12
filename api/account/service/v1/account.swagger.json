@@ -15,72 +15,7 @@
   "produces": [
     "application/json"
   ],
-  "paths": {
-    "/account/login": {
-      "post": {
-        "operationId": "AccountService_Login",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1LoginResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1LoginRequest"
-            }
-          }
-        ],
-        "tags": [
-          "AccountService"
-        ]
-      }
-    },
-    "/account/register": {
-      "post": {
-        "operationId": "AccountService_Register",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1RegisterResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1RegisterRequest"
-            }
-          }
-        ],
-        "tags": [
-          "AccountService"
-        ]
-      }
-    }
-  },
+  "paths": {},
   "definitions": {
     "protobufAny": {
       "type": "object",
@@ -109,23 +44,21 @@
         }
       }
     },
-    "v1LoginRequest": {
+    "v1CreateAccountResponse": {
       "type": "object",
       "properties": {
-        "mail": {
-          "type": "string"
+        "id": {
+          "type": "string",
+          "format": "int64"
         },
-        "password": {
+        "accountMail": {
           "type": "string"
         }
       }
     },
-    "v1LoginResponse": {
+    "v1DeleteAccountResponse": {
       "type": "object",
       "properties": {
-        "token": {
-          "type": "string"
-        },
         "ok": {
           "type": "boolean"
         },
@@ -135,19 +68,62 @@
         }
       }
     },
-    "v1RegisterRequest": {
+    "v1FetchAccountByAccountMailResponse": {
       "type": "object",
       "properties": {
-        "mail": {
-          "type": "string"
+        "id": {
+          "type": "string",
+          "format": "int64"
         },
-        "password": {
+        "accountMail": {
           "type": "string"
         }
       }
     },
-    "v1RegisterResponse": {
-      "type": "object"
+    "v1FetchAccountByIDResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "accountMail": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ListAccountResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "accountMail": {
+          "type": "string"
+        }
+      }
+    },
+    "v1SaveAccountResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1VerifyPasswordResponse": {
+      "type": "object",
+      "properties": {
+        "ok": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
     }
   }
 }

@@ -7,30 +7,36 @@
 package main
 
 import (
+	"github.com/go-kratos/kratos/v2"
+	"github.com/go-kratos/kratos/v2/log"
 	"github.com/mizumoto-cn/bookkeepingo/app/account/service/internal/biz"
 	"github.com/mizumoto-cn/bookkeepingo/app/account/service/internal/conf"
 	"github.com/mizumoto-cn/bookkeepingo/app/account/service/internal/data"
 	"github.com/mizumoto-cn/bookkeepingo/app/account/service/internal/server"
 	"github.com/mizumoto-cn/bookkeepingo/app/account/service/internal/service"
+	"go.opentelemetry.io/otel/sdk/trace"
+)
 
-	"github.com/go-kratos/kratos/v2"
-	"github.com/go-kratos/kratos/v2/log"
+import (
+	_ "go.uber.org/automaxprocs"
 )
 
 // Injectors from wire.go:
 
 // wireApp init kratos application.
-func wireApp(confServer *conf.Server, confData *conf.Data, confAuth *conf.Auth, logger log.Logger) (*kratos.App, func(), error) {
-	dataData, cleanup, err := data.NewData(confData, logger)
+func wireApp(confServer *conf.Server, registry *conf.Registry, confData *conf.Data, auth *conf.Auth, logger log.Logger, tracerProvider *trace.TracerProvider) (*kratos.App, func(), error) {
+	client := data.NewEntClient(confData, logger)
+	cmdable := data.NewRedisCmd(confData, logger)
+	dataData, cleanup, err := data.NewData(logger, client, cmdable)
 	if err != nil {
 		return nil, nil, err
 	}
 	accountRepo := data.NewAccountRepo(dataData, logger)
-	accountUsecase := biz.NewAccountUsecase(confAuth, *biz.NewEncryptionService(), accountRepo, logger)
+	accountUsecase := biz.NewAccountUsecase(accountRepo, logger)
 	accountService := service.NewAccountService(accountUsecase, logger)
-	grpcServer := server.NewGRPCServer(confServer, logger, accountService)
-	httpServer := server.NewHTTPServer(confServer, logger, accountService)
-	app := newApp(logger, grpcServer, httpServer)
+	grpcServer := server.NewGRPCServer(confServer, auth, logger, tracerProvider, accountService)
+	registrar := server.NewRegistrar(registry)
+	app := newApp(logger, grpcServer, registrar)
 	return app, func() {
 		cleanup()
 	}, nil

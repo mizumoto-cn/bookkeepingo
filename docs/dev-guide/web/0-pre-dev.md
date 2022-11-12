@@ -12,6 +12,9 @@ npm init vue@latest bookkeepingo
 
 ...
 
+cd bookkeepingo
+npm install
+npm run lint
 npm run dev
 ```
 

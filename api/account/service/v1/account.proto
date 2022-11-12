@@ -7,45 +7,90 @@ import "google/api/annotations.proto";
 option go_package = "github.com/mizumoto-cn/bookkeepingo/api/account/v1;accountv1";
 
 service AccountService {
-    rpc Login(LoginRequest) returns (LoginResponse) {
-        option (google.api.http) = {
-            post: "/account/login"
-            body: "*"
-        };
+    rpc FetchAccountByAccountMail (FetchAccountByAccountMailRequest) returns (FetchAccountByAccountMailResponse) {
     }
-    rpc Register(RegisterRequest) returns (RegisterResponse) {
-        option (google.api.http) = {
-            post: "/account/register"
-            body: "*"
-        };
+
+    rpc FetchAccountByID (FetchAccountByIDRequest) returns (FetchAccountByIDResponse) {
+    }
+
+    rpc CreateAccount (CreateAccountRequest) returns (CreateAccountResponse) {
+    }
+
+    rpc SaveAccount (SaveAccountRequest) returns (SaveAccountResponse) {
+    }
+
+    rpc DeleteAccount (DeleteAccountRequest) returns (DeleteAccountResponse) {
+    }
+
+    rpc ListAccount (ListAccountRequest) returns (ListAccountResponse) {
+    }
+
+    rpc VerifyPassword (VerifyPasswordRequest) returns (VerifyPasswordResponse) {
     }
 }
 
-message LoginRequest {
-    string mail = 1;
-    string password = 2;
-}
-
-message LoginResponse {
-    string token = 1;
-    bool ok = 2;
-    int64 id = 3;
-}
-
-message RegisterRequest {
-    string mail = 1;
-    string password = 2;
-}
-
-message RegisterResponse {
-}
-
-message SaveUserRequest {
+message SaveAccountRequest {
     int64 id = 1;
-    string mail = 2;
+    string accountMail = 2;
     string password = 3;
 }
 
-message SaveUserResponse {
+message SaveAccountResponse {
     int64 id = 1;
+}
+
+message CreateAccountRequest {
+    string accountMail = 1;
+    string password = 2;
+}
+
+message CreateAccountResponse {
+    int64 id = 1;
+    string accountMail = 2;
+}
+
+message DeleteAccountRequest {
+    int64 id = 1;
+}
+
+message DeleteAccountResponse {
+    bool ok = 1;
+    int64 id = 2;
+}
+
+message FetchAccountByIDRequest {
+    int64 id = 1;
+}
+
+message FetchAccountByIDResponse {
+    int64 id = 1;
+    string accountMail = 2;
+}
+
+message FetchAccountByAccountMailRequest {
+    string accountMail = 1;
+}
+
+message FetchAccountByAccountMailResponse {
+    int64 id = 1;
+    string accountMail = 2;
+}
+
+message ListAccountRequest {
+    int64 id = 1;
+}
+
+message ListAccountResponse {
+    int64 id = 1;
+    string accountMail = 2;
+}
+
+message VerifyPasswordRequest {
+    string accountMail = 1;
+    string password = 2;
+}
+
+message VerifyPasswordResponse {
+    bool ok = 1;
+    int64 id = 2;
 }

@@ -7,93 +7,93 @@ import "google/api/annotations.proto";
 option go_package = "github.com/mizumoto-cn/bookkeepingo/api/site/admin/v1;adminv1";
 
 service SiteAdminService {
-    rpc Login (LoginReq) returns (LoginResp) {
+    rpc Login (LoginRequire) returns (LoginResponse) {
         option (google.api.http) = {
             post: "/v1/login"
             body: "*"
         };
     }
 
-    rpc Logout (LogoutReq) returns (LogoutResp) {
+    rpc Logout (LogoutRequire) returns (LogoutResponse) {
         option (google.api.http) = {
             post: "/v1/logout"
             body: "*"
         };
     }
 
-    rpc ListAccount (ListAccountReq) returns (ListAccountResp) {
+    rpc ListAccount (ListAccountRequire) returns (ListAccountResponse) {
         option (google.api.http) = {
             get: "/v1/accounts"
         };
     }
 
-    rpc GetAccount (GetAccountReq) returns (GetAccountResp) {
+    rpc GetAccount (GetAccountRequire) returns (GetAccountResponse) {
         option (google.api.http) = {
             get: "/v1/accounts/{id}"
         };
     }
 }
 
-message RegisterReq {
+message RegisterRequire {
     string accountname = 1;
     string password = 2;
 }
 
-message RegisterResp {
+message RegisterResponse {
     int64 id = 1;
 }
 
-message LoginReq {
+message LoginRequire {
     string accountname = 1;
     string password = 2;
 }
 
-message LoginResp {
+message LoginResponse {
     string token = 1;
 }
 
-message LogoutReq {
+message LogoutRequire {
 
 }
 
-message LogoutResp {
+message LogoutResponse {
 
 }
 
-message GetAccountReq {
+message GetAccountRequire {
     int64 id = 1;
 }
 
-message GetAccountResp {
-    int64 id = 1;
-    string accountname = 2;
-}
-
-
-message ListAccountReq {
-
-}
-
-message ListAccountResp {
-
-}
-
-message CreateAccountReq {
-    string accountname = 1;
-    string password = 2;
-}
-
-message CreateAccountResp {
+message GetAccountResponse {
     int64 id = 1;
     string accountname = 2;
 }
 
-message VerifyPasswordReq {
+
+message ListAccountRequire {
+
+}
+
+message ListAccountResponse {
+
+}
+
+message CreateAccountRequire {
     string accountname = 1;
     string password = 2;
 }
 
-message VerifyPasswordResp {
+message CreateAccountResponse {
+    int64 id = 1;
+    string accountname = 2;
+}
+
+message VerifyPasswordRequire {
+    string accountname = 1;
+    string password = 2;
+}
+
+message VerifyPasswordResponse {
     bool ok = 1;
     int64 id = 2;
 }
