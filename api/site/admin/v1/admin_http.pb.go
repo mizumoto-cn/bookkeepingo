@@ -19,10 +19,10 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationSiteAdminServiceGetAccount = "/shop.interface.v1.SiteAdminService/GetAccount"
-const OperationSiteAdminServiceListAccount = "/shop.interface.v1.SiteAdminService/ListAccount"
-const OperationSiteAdminServiceLogin = "/shop.interface.v1.SiteAdminService/Login"
-const OperationSiteAdminServiceLogout = "/shop.interface.v1.SiteAdminService/Logout"
+const OperationSiteAdminServiceGetAccount = "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/GetAccount"
+const OperationSiteAdminServiceListAccount = "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/ListAccount"
+const OperationSiteAdminServiceLogin = "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/Login"
+const OperationSiteAdminServiceLogout = "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/Logout"
 
 type SiteAdminServiceHTTPServer interface {
 	GetAccount(context.Context, *GetAccountRequire) (*GetAccountResponse, error)

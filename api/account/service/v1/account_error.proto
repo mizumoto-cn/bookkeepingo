@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package bookkeepingo.mizumoto.cn.account.v1;
+package bookkeepingo.mizumoto.tech.account.v1;
 
 import "errors/errors.proto";
 

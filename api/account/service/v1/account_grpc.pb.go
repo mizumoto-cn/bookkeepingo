@@ -41,7 +41,7 @@ func NewAccountServiceClient(cc grpc.ClientConnInterface) AccountServiceClient {
 
 func (c *accountServiceClient) FetchAccountByAccountMail(ctx context.Context, in *FetchAccountByAccountMailRequest, opts ...grpc.CallOption) (*FetchAccountByAccountMailResponse, error) {
 	out := new(FetchAccountByAccountMailResponse)
-	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.cn.account.v1.AccountService/FetchAccountByAccountMail", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.tech.account.v1.AccountService/FetchAccountByAccountMail", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ func (c *accountServiceClient) FetchAccountByAccountMail(ctx context.Context, in
 
 func (c *accountServiceClient) FetchAccountByID(ctx context.Context, in *FetchAccountByIDRequest, opts ...grpc.CallOption) (*FetchAccountByIDResponse, error) {
 	out := new(FetchAccountByIDResponse)
-	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.cn.account.v1.AccountService/FetchAccountByID", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.tech.account.v1.AccountService/FetchAccountByID", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ func (c *accountServiceClient) FetchAccountByID(ctx context.Context, in *FetchAc
 
 func (c *accountServiceClient) CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error) {
 	out := new(CreateAccountResponse)
-	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.cn.account.v1.AccountService/CreateAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.tech.account.v1.AccountService/CreateAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ func (c *accountServiceClient) CreateAccount(ctx context.Context, in *CreateAcco
 
 func (c *accountServiceClient) SaveAccount(ctx context.Context, in *SaveAccountRequest, opts ...grpc.CallOption) (*SaveAccountResponse, error) {
 	out := new(SaveAccountResponse)
-	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.cn.account.v1.AccountService/SaveAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.tech.account.v1.AccountService/SaveAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func (c *accountServiceClient) SaveAccount(ctx context.Context, in *SaveAccountR
 
 func (c *accountServiceClient) DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error) {
 	out := new(DeleteAccountResponse)
-	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.cn.account.v1.AccountService/DeleteAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.tech.account.v1.AccountService/DeleteAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ func (c *accountServiceClient) DeleteAccount(ctx context.Context, in *DeleteAcco
 
 func (c *accountServiceClient) ListAccount(ctx context.Context, in *ListAccountRequest, opts ...grpc.CallOption) (*ListAccountResponse, error) {
 	out := new(ListAccountResponse)
-	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.cn.account.v1.AccountService/ListAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.tech.account.v1.AccountService/ListAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ func (c *accountServiceClient) ListAccount(ctx context.Context, in *ListAccountR
 
 func (c *accountServiceClient) VerifyPassword(ctx context.Context, in *VerifyPasswordRequest, opts ...grpc.CallOption) (*VerifyPasswordResponse, error) {
 	out := new(VerifyPasswordResponse)
-	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.cn.account.v1.AccountService/VerifyPassword", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.tech.account.v1.AccountService/VerifyPassword", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -164,7 +164,7 @@ func _AccountService_FetchAccountByAccountMail_Handler(srv interface{}, ctx cont
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/bookkeepingo.mizumoto.cn.account.v1.AccountService/FetchAccountByAccountMail",
+		FullMethod: "/bookkeepingo.mizumoto.tech.account.v1.AccountService/FetchAccountByAccountMail",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountServiceServer).FetchAccountByAccountMail(ctx, req.(*FetchAccountByAccountMailRequest))
@@ -182,7 +182,7 @@ func _AccountService_FetchAccountByID_Handler(srv interface{}, ctx context.Conte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/bookkeepingo.mizumoto.cn.account.v1.AccountService/FetchAccountByID",
+		FullMethod: "/bookkeepingo.mizumoto.tech.account.v1.AccountService/FetchAccountByID",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountServiceServer).FetchAccountByID(ctx, req.(*FetchAccountByIDRequest))
@@ -200,7 +200,7 @@ func _AccountService_CreateAccount_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/bookkeepingo.mizumoto.cn.account.v1.AccountService/CreateAccount",
+		FullMethod: "/bookkeepingo.mizumoto.tech.account.v1.AccountService/CreateAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountServiceServer).CreateAccount(ctx, req.(*CreateAccountRequest))
@@ -218,7 +218,7 @@ func _AccountService_SaveAccount_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/bookkeepingo.mizumoto.cn.account.v1.AccountService/SaveAccount",
+		FullMethod: "/bookkeepingo.mizumoto.tech.account.v1.AccountService/SaveAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountServiceServer).SaveAccount(ctx, req.(*SaveAccountRequest))
@@ -236,7 +236,7 @@ func _AccountService_DeleteAccount_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/bookkeepingo.mizumoto.cn.account.v1.AccountService/DeleteAccount",
+		FullMethod: "/bookkeepingo.mizumoto.tech.account.v1.AccountService/DeleteAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountServiceServer).DeleteAccount(ctx, req.(*DeleteAccountRequest))
@@ -254,7 +254,7 @@ func _AccountService_ListAccount_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/bookkeepingo.mizumoto.cn.account.v1.AccountService/ListAccount",
+		FullMethod: "/bookkeepingo.mizumoto.tech.account.v1.AccountService/ListAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountServiceServer).ListAccount(ctx, req.(*ListAccountRequest))
@@ -272,7 +272,7 @@ func _AccountService_VerifyPassword_Handler(srv interface{}, ctx context.Context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/bookkeepingo.mizumoto.cn.account.v1.AccountService/VerifyPassword",
+		FullMethod: "/bookkeepingo.mizumoto.tech.account.v1.AccountService/VerifyPassword",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountServiceServer).VerifyPassword(ctx, req.(*VerifyPasswordRequest))
@@ -284,7 +284,7 @@ func _AccountService_VerifyPassword_Handler(srv interface{}, ctx context.Context
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var AccountService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bookkeepingo.mizumoto.cn.account.v1.AccountService",
+	ServiceName: "bookkeepingo.mizumoto.tech.account.v1.AccountService",
 	HandlerType: (*AccountServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

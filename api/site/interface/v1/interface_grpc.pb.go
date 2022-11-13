@@ -38,7 +38,7 @@ func NewSiteAdminServiceClient(cc grpc.ClientConnInterface) SiteAdminServiceClie
 
 func (c *siteAdminServiceClient) Login(ctx context.Context, in *LoginRequire, opts ...grpc.CallOption) (*LoginResponse, error) {
 	out := new(LoginResponse)
-	err := c.cc.Invoke(ctx, "/shop.interface.v1.SiteAdminService/Login", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/Login", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ func (c *siteAdminServiceClient) Login(ctx context.Context, in *LoginRequire, op
 
 func (c *siteAdminServiceClient) Logout(ctx context.Context, in *LogoutRequire, opts ...grpc.CallOption) (*LogoutResponse, error) {
 	out := new(LogoutResponse)
-	err := c.cc.Invoke(ctx, "/shop.interface.v1.SiteAdminService/Logout", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/Logout", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ func (c *siteAdminServiceClient) Logout(ctx context.Context, in *LogoutRequire, 
 
 func (c *siteAdminServiceClient) ListAccount(ctx context.Context, in *ListAccountRequire, opts ...grpc.CallOption) (*ListAccountResponse, error) {
 	out := new(ListAccountResponse)
-	err := c.cc.Invoke(ctx, "/shop.interface.v1.SiteAdminService/ListAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/ListAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ func (c *siteAdminServiceClient) ListAccount(ctx context.Context, in *ListAccoun
 
 func (c *siteAdminServiceClient) GetAccount(ctx context.Context, in *GetAccountRequire, opts ...grpc.CallOption) (*GetAccountResponse, error) {
 	out := new(GetAccountResponse)
-	err := c.cc.Invoke(ctx, "/shop.interface.v1.SiteAdminService/GetAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/GetAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -122,7 +122,7 @@ func _SiteAdminService_Login_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/shop.interface.v1.SiteAdminService/Login",
+		FullMethod: "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/Login",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SiteAdminServiceServer).Login(ctx, req.(*LoginRequire))
@@ -140,7 +140,7 @@ func _SiteAdminService_Logout_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/shop.interface.v1.SiteAdminService/Logout",
+		FullMethod: "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/Logout",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SiteAdminServiceServer).Logout(ctx, req.(*LogoutRequire))
@@ -158,7 +158,7 @@ func _SiteAdminService_ListAccount_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/shop.interface.v1.SiteAdminService/ListAccount",
+		FullMethod: "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/ListAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SiteAdminServiceServer).ListAccount(ctx, req.(*ListAccountRequire))
@@ -176,7 +176,7 @@ func _SiteAdminService_GetAccount_Handler(srv interface{}, ctx context.Context, 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/shop.interface.v1.SiteAdminService/GetAccount",
+		FullMethod: "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/GetAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SiteAdminServiceServer).GetAccount(ctx, req.(*GetAccountRequire))
@@ -188,7 +188,7 @@ func _SiteAdminService_GetAccount_Handler(srv interface{}, ctx context.Context, 
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var SiteAdminService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "shop.interface.v1.SiteAdminService",
+	ServiceName: "bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService",
 	HandlerType: (*SiteAdminServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
