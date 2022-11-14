@@ -5,3 +5,52 @@ option go_package = "github.com/mizumoto-cn/bookkeepingo/app/site/admin/internal
 
 import "google/protobuf/duration.proto";
 
+message Bootstrap {
+    Server server = 1;
+    Data data = 2;
+    Trace trace = 3;
+}
+
+message Trace {
+    string endpoint = 1;
+}
+
+message Server {
+    message HTTP {
+        string addr = 1;
+        string network = 2;
+        google.protobuf.Duration timeout = 3;
+    }
+    message GRPC {
+        string addr = 1;
+        string network = 2;
+        google.protobuf.Duration timeout = 3;
+    }
+    HTTP http = 1;
+    GRPC grpc = 2;
+}
+
+message Data {
+    message Database {
+        string source = 1;
+        string driver = 2;
+    }
+    message Redis {
+        string addr = 1;
+        string password = 2;
+        int32 db = 3;
+
+        google.protobuf.Duration dialTimeout = 4;
+        google.protobuf.Duration readTimeout = 5;
+        google.protobuf.Duration writeTimeout = 6;
+    }
+    Database database = 1;
+}
+
+message Registry {
+    message Consul {
+        string addr = 1;
+        string scheme = 2;
+    }
+    Consul consul = 1;
+}

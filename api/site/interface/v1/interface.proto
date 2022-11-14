@@ -4,7 +4,7 @@ package bookkeepingo.mizumoto.tech.site.interface.v1;
 
 import "google/api/annotations.proto";
 
-option go_package = "github.com/mizumoto-cn/bookkeepingo/api/site/interface/v1;interfacev1";
+option go_package = "github.com/mizumoto-cn/bookkeepingo/api/site/interface/v1;v1";
 
 service SiteAdminService {
     rpc Login (LoginRequire) returns (LoginResponse) {

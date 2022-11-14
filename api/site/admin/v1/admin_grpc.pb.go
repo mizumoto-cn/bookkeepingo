@@ -4,7 +4,7 @@
 // - protoc             v3.21.9
 // source: v1/admin.proto
 
-package adminv1
+package v1
 
 import (
 	context "context"

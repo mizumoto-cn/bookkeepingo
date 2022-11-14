@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package bookkeepingo.mizumoto.tech.account.v1;
+package bookkeepingo.mizumoto.tech.account.service.v1;
 
 import "errors/errors.proto";
 
-option go_package = "github.com/mizumoto-cn/bookkeepingo/api/account/v1;accountv1";
+option go_package = "github.com/mizumoto-cn/bookkeepingo/api/account/service/v1;v1";
 option java_multiple_files = true;
 
 enum UserServiceErrorReason {

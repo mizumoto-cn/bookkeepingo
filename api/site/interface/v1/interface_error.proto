@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package bookkeepingo.mizumoto.tech.site.admin.v1;
+package bookkeepingo.mizumoto.tech.site.interface.v1;
 import "errors/errors.proto";
 
-option go_package = "github.com/mizumoto-cn/bookkeepingo/api/site/interface/v1;interfacev1";
+option go_package = "github.com/mizumoto-cn/bookkeepingo/api/site/interface/v1;v1";
 option java_multiple_files = true;
 
 enum ShopAdminErrorReason {

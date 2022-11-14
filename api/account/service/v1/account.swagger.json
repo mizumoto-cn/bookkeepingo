@@ -17,6 +17,18 @@
   ],
   "paths": {},
   "definitions": {
+    "ListAccountResponseAccount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "accountMail": {
+          "type": "string"
+        }
+      }
+    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -95,12 +107,11 @@
     "v1ListAccountResponse": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "format": "int64"
-        },
-        "accountMail": {
-          "type": "string"
+        "accounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListAccountResponseAccount"
+          }
         }
       }
     },

@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package bookkeepingo.mizumoto.tech.account.v1;
+package bookkeepingo.mizumoto.tech.account.service.v1;
 
 import "google/api/annotations.proto";
 
-option go_package = "github.com/mizumoto-cn/bookkeepingo/api/account/v1;accountv1";
+option go_package = "github.com/mizumoto-cn/bookkeepingo/api/account/service/v1;v1";
 
 service AccountService {
     rpc FetchAccountByAccountMail (FetchAccountByAccountMailRequest) returns (FetchAccountByAccountMailResponse) {
@@ -81,8 +81,11 @@ message ListAccountRequest {
 }
 
 message ListAccountResponse {
-    int64 id = 1;
-    string accountMail = 2;
+    message Account {
+        int64 id = 1;
+        string accountMail = 2;
+    }
+    repeated Account accounts = 1;
 }
 
 message VerifyPasswordRequest {
