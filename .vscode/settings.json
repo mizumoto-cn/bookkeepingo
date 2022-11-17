@@ -2,8 +2,11 @@
     "cSpell.words": [
         "Accountmail",
         "bookkeepingo",
+        "flagconf",
         "Kratos",
+        "ldflags",
         "opentelemetry",
-        "otel"
+        "otel",
+        "Schemaless"
     ]
 }

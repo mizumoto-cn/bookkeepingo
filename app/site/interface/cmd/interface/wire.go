@@ -6,6 +6,9 @@
 package main
 
 import (
+	"flag"
+	"os"
+
 	"github.com/mizumoto-cn/bookkeepingo/app/site/interface/interface/internal/biz"
 	"github.com/mizumoto-cn/bookkeepingo/app/site/interface/interface/internal/conf"
 	"github.com/mizumoto-cn/bookkeepingo/app/site/interface/interface/internal/data"
@@ -14,10 +17,12 @@ import (
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
+	
 	"github.com/google/wire"
+	tracesdk "go.opentelemetry.io/otel/sdk/trace"
 )
 
 // wireApp init kratos application.
-func wireApp(*conf.Server, *conf.Data, log.Logger) (*kratos.App, func(), error) {
+func wireApp(*conf.Server, *conf.Registry, *conf.Data, log.Logger, tracesdk *tracesdk.TraceProvider) (*kratos.App, func(), error) {
 	panic(wire.Build(server.ProviderSet, data.ProviderSet, biz.ProviderSet, service.ProviderSet, newApp))
 }
