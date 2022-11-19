@@ -1,13 +1,15 @@
 syntax = "proto3";
 package kratos.api;
 
-option go_package = "interface/internal/conf;conf";
+option go_package = "github.com/mizumoto-cn/bookkeepingo/app/site/interface/internal/conf;conf";
 
 import "google/protobuf/duration.proto";
 
 message Bootstrap {
   Server server = 1;
   Data data = 2;
+  Trace trace = 3;
+  Auth auth = 4;
 }
 
 message Server {
@@ -37,5 +39,22 @@ message Data {
     google.protobuf.Duration write_timeout = 4;
   }
   Database database = 1;
-  Redis redis = 2;
+  // Redis redis = 2;
+}
+
+message Registry {
+  message Consul {
+    string addr = 1;
+    string scheme = 2;
+  }
+  Consul consul = 1;
+}
+
+message Auth {
+  string service_key = 1;
+  string api_key = 2;
+}
+
+message Trace {
+  string endpoint = 1;
 }

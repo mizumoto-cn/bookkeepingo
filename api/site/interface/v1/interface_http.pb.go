@@ -25,10 +25,10 @@ const OperationSiteAdminServiceLogin = "/bookkeepingo.mizumoto.tech.site.interfa
 const OperationSiteAdminServiceLogout = "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/Logout"
 
 type SiteAdminServiceHTTPServer interface {
-	GetAccount(context.Context, *GetAccountRequire) (*GetAccountResponse, error)
-	ListAccount(context.Context, *ListAccountRequire) (*ListAccountResponse, error)
-	Login(context.Context, *LoginRequire) (*LoginResponse, error)
-	Logout(context.Context, *LogoutRequire) (*LogoutResponse, error)
+	GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error)
+	ListAccount(context.Context, *ListAccountRequest) (*ListAccountResponse, error)
+	Login(context.Context, *LoginRequest) (*LoginResponse, error)
+	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 }
 
 func RegisterSiteAdminServiceHTTPServer(s *http.Server, srv SiteAdminServiceHTTPServer) {
@@ -41,13 +41,13 @@ func RegisterSiteAdminServiceHTTPServer(s *http.Server, srv SiteAdminServiceHTTP
 
 func _SiteAdminService_Login0_HTTP_Handler(srv SiteAdminServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in LoginRequire
+		var in LoginRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationSiteAdminServiceLogin)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.Login(ctx, req.(*LoginRequire))
+			return srv.Login(ctx, req.(*LoginRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -60,13 +60,13 @@ func _SiteAdminService_Login0_HTTP_Handler(srv SiteAdminServiceHTTPServer) func(
 
 func _SiteAdminService_Logout0_HTTP_Handler(srv SiteAdminServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in LogoutRequire
+		var in LogoutRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationSiteAdminServiceLogout)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.Logout(ctx, req.(*LogoutRequire))
+			return srv.Logout(ctx, req.(*LogoutRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -79,13 +79,13 @@ func _SiteAdminService_Logout0_HTTP_Handler(srv SiteAdminServiceHTTPServer) func
 
 func _SiteAdminService_ListAccount0_HTTP_Handler(srv SiteAdminServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in ListAccountRequire
+		var in ListAccountRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationSiteAdminServiceListAccount)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListAccount(ctx, req.(*ListAccountRequire))
+			return srv.ListAccount(ctx, req.(*ListAccountRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -98,7 +98,7 @@ func _SiteAdminService_ListAccount0_HTTP_Handler(srv SiteAdminServiceHTTPServer)
 
 func _SiteAdminService_GetAccount0_HTTP_Handler(srv SiteAdminServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in GetAccountRequire
+		var in GetAccountRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
@@ -107,7 +107,7 @@ func _SiteAdminService_GetAccount0_HTTP_Handler(srv SiteAdminServiceHTTPServer) 
 		}
 		http.SetOperation(ctx, OperationSiteAdminServiceGetAccount)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetAccount(ctx, req.(*GetAccountRequire))
+			return srv.GetAccount(ctx, req.(*GetAccountRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -119,10 +119,10 @@ func _SiteAdminService_GetAccount0_HTTP_Handler(srv SiteAdminServiceHTTPServer) 
 }
 
 type SiteAdminServiceHTTPClient interface {
-	GetAccount(ctx context.Context, req *GetAccountRequire, opts ...http.CallOption) (rsp *GetAccountResponse, err error)
-	ListAccount(ctx context.Context, req *ListAccountRequire, opts ...http.CallOption) (rsp *ListAccountResponse, err error)
-	Login(ctx context.Context, req *LoginRequire, opts ...http.CallOption) (rsp *LoginResponse, err error)
-	Logout(ctx context.Context, req *LogoutRequire, opts ...http.CallOption) (rsp *LogoutResponse, err error)
+	GetAccount(ctx context.Context, req *GetAccountRequest, opts ...http.CallOption) (rsp *GetAccountResponse, err error)
+	ListAccount(ctx context.Context, req *ListAccountRequest, opts ...http.CallOption) (rsp *ListAccountResponse, err error)
+	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *LoginResponse, err error)
+	Logout(ctx context.Context, req *LogoutRequest, opts ...http.CallOption) (rsp *LogoutResponse, err error)
 }
 
 type SiteAdminServiceHTTPClientImpl struct {
@@ -133,7 +133,7 @@ func NewSiteAdminServiceHTTPClient(client *http.Client) SiteAdminServiceHTTPClie
 	return &SiteAdminServiceHTTPClientImpl{client}
 }
 
-func (c *SiteAdminServiceHTTPClientImpl) GetAccount(ctx context.Context, in *GetAccountRequire, opts ...http.CallOption) (*GetAccountResponse, error) {
+func (c *SiteAdminServiceHTTPClientImpl) GetAccount(ctx context.Context, in *GetAccountRequest, opts ...http.CallOption) (*GetAccountResponse, error) {
 	var out GetAccountResponse
 	pattern := "/v1/accounts/{id}"
 	path := binding.EncodeURL(pattern, in, true)
@@ -146,7 +146,7 @@ func (c *SiteAdminServiceHTTPClientImpl) GetAccount(ctx context.Context, in *Get
 	return &out, err
 }
 
-func (c *SiteAdminServiceHTTPClientImpl) ListAccount(ctx context.Context, in *ListAccountRequire, opts ...http.CallOption) (*ListAccountResponse, error) {
+func (c *SiteAdminServiceHTTPClientImpl) ListAccount(ctx context.Context, in *ListAccountRequest, opts ...http.CallOption) (*ListAccountResponse, error) {
 	var out ListAccountResponse
 	pattern := "/v1/accounts"
 	path := binding.EncodeURL(pattern, in, true)
@@ -159,7 +159,7 @@ func (c *SiteAdminServiceHTTPClientImpl) ListAccount(ctx context.Context, in *Li
 	return &out, err
 }
 
-func (c *SiteAdminServiceHTTPClientImpl) Login(ctx context.Context, in *LoginRequire, opts ...http.CallOption) (*LoginResponse, error) {
+func (c *SiteAdminServiceHTTPClientImpl) Login(ctx context.Context, in *LoginRequest, opts ...http.CallOption) (*LoginResponse, error) {
 	var out LoginResponse
 	pattern := "/v1/login"
 	path := binding.EncodeURL(pattern, in, false)
@@ -172,7 +172,7 @@ func (c *SiteAdminServiceHTTPClientImpl) Login(ctx context.Context, in *LoginReq
 	return &out, err
 }
 
-func (c *SiteAdminServiceHTTPClientImpl) Logout(ctx context.Context, in *LogoutRequire, opts ...http.CallOption) (*LogoutResponse, error) {
+func (c *SiteAdminServiceHTTPClientImpl) Logout(ctx context.Context, in *LogoutRequest, opts ...http.CallOption) (*LogoutResponse, error) {
 	var out LogoutResponse
 	pattern := "/v1/logout"
 	path := binding.EncodeURL(pattern, in, false)

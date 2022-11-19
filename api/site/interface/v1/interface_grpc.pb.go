@@ -22,10 +22,10 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SiteAdminServiceClient interface {
-	Login(ctx context.Context, in *LoginRequire, opts ...grpc.CallOption) (*LoginResponse, error)
-	Logout(ctx context.Context, in *LogoutRequire, opts ...grpc.CallOption) (*LogoutResponse, error)
-	ListAccount(ctx context.Context, in *ListAccountRequire, opts ...grpc.CallOption) (*ListAccountResponse, error)
-	GetAccount(ctx context.Context, in *GetAccountRequire, opts ...grpc.CallOption) (*GetAccountResponse, error)
+	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
+	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
+	ListAccount(ctx context.Context, in *ListAccountRequest, opts ...grpc.CallOption) (*ListAccountResponse, error)
+	GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error)
 }
 
 type siteAdminServiceClient struct {
@@ -36,7 +36,7 @@ func NewSiteAdminServiceClient(cc grpc.ClientConnInterface) SiteAdminServiceClie
 	return &siteAdminServiceClient{cc}
 }
 
-func (c *siteAdminServiceClient) Login(ctx context.Context, in *LoginRequire, opts ...grpc.CallOption) (*LoginResponse, error) {
+func (c *siteAdminServiceClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
 	out := new(LoginResponse)
 	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/Login", in, out, opts...)
 	if err != nil {
@@ -45,7 +45,7 @@ func (c *siteAdminServiceClient) Login(ctx context.Context, in *LoginRequire, op
 	return out, nil
 }
 
-func (c *siteAdminServiceClient) Logout(ctx context.Context, in *LogoutRequire, opts ...grpc.CallOption) (*LogoutResponse, error) {
+func (c *siteAdminServiceClient) Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error) {
 	out := new(LogoutResponse)
 	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/Logout", in, out, opts...)
 	if err != nil {
@@ -54,7 +54,7 @@ func (c *siteAdminServiceClient) Logout(ctx context.Context, in *LogoutRequire, 
 	return out, nil
 }
 
-func (c *siteAdminServiceClient) ListAccount(ctx context.Context, in *ListAccountRequire, opts ...grpc.CallOption) (*ListAccountResponse, error) {
+func (c *siteAdminServiceClient) ListAccount(ctx context.Context, in *ListAccountRequest, opts ...grpc.CallOption) (*ListAccountResponse, error) {
 	out := new(ListAccountResponse)
 	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/ListAccount", in, out, opts...)
 	if err != nil {
@@ -63,7 +63,7 @@ func (c *siteAdminServiceClient) ListAccount(ctx context.Context, in *ListAccoun
 	return out, nil
 }
 
-func (c *siteAdminServiceClient) GetAccount(ctx context.Context, in *GetAccountRequire, opts ...grpc.CallOption) (*GetAccountResponse, error) {
+func (c *siteAdminServiceClient) GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error) {
 	out := new(GetAccountResponse)
 	err := c.cc.Invoke(ctx, "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/GetAccount", in, out, opts...)
 	if err != nil {
@@ -76,10 +76,10 @@ func (c *siteAdminServiceClient) GetAccount(ctx context.Context, in *GetAccountR
 // All implementations must embed UnimplementedSiteAdminServiceServer
 // for forward compatibility
 type SiteAdminServiceServer interface {
-	Login(context.Context, *LoginRequire) (*LoginResponse, error)
-	Logout(context.Context, *LogoutRequire) (*LogoutResponse, error)
-	ListAccount(context.Context, *ListAccountRequire) (*ListAccountResponse, error)
-	GetAccount(context.Context, *GetAccountRequire) (*GetAccountResponse, error)
+	Login(context.Context, *LoginRequest) (*LoginResponse, error)
+	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
+	ListAccount(context.Context, *ListAccountRequest) (*ListAccountResponse, error)
+	GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error)
 	mustEmbedUnimplementedSiteAdminServiceServer()
 }
 
@@ -87,16 +87,16 @@ type SiteAdminServiceServer interface {
 type UnimplementedSiteAdminServiceServer struct {
 }
 
-func (UnimplementedSiteAdminServiceServer) Login(context.Context, *LoginRequire) (*LoginResponse, error) {
+func (UnimplementedSiteAdminServiceServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
-func (UnimplementedSiteAdminServiceServer) Logout(context.Context, *LogoutRequire) (*LogoutResponse, error) {
+func (UnimplementedSiteAdminServiceServer) Logout(context.Context, *LogoutRequest) (*LogoutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Logout not implemented")
 }
-func (UnimplementedSiteAdminServiceServer) ListAccount(context.Context, *ListAccountRequire) (*ListAccountResponse, error) {
+func (UnimplementedSiteAdminServiceServer) ListAccount(context.Context, *ListAccountRequest) (*ListAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAccount not implemented")
 }
-func (UnimplementedSiteAdminServiceServer) GetAccount(context.Context, *GetAccountRequire) (*GetAccountResponse, error) {
+func (UnimplementedSiteAdminServiceServer) GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccount not implemented")
 }
 func (UnimplementedSiteAdminServiceServer) mustEmbedUnimplementedSiteAdminServiceServer() {}
@@ -113,7 +113,7 @@ func RegisterSiteAdminServiceServer(s grpc.ServiceRegistrar, srv SiteAdminServic
 }
 
 func _SiteAdminService_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LoginRequire)
+	in := new(LoginRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -125,13 +125,13 @@ func _SiteAdminService_Login_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/Login",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SiteAdminServiceServer).Login(ctx, req.(*LoginRequire))
+		return srv.(SiteAdminServiceServer).Login(ctx, req.(*LoginRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _SiteAdminService_Logout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LogoutRequire)
+	in := new(LogoutRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -143,13 +143,13 @@ func _SiteAdminService_Logout_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/Logout",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SiteAdminServiceServer).Logout(ctx, req.(*LogoutRequire))
+		return srv.(SiteAdminServiceServer).Logout(ctx, req.(*LogoutRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _SiteAdminService_ListAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAccountRequire)
+	in := new(ListAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -161,13 +161,13 @@ func _SiteAdminService_ListAccount_Handler(srv interface{}, ctx context.Context,
 		FullMethod: "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/ListAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SiteAdminServiceServer).ListAccount(ctx, req.(*ListAccountRequire))
+		return srv.(SiteAdminServiceServer).ListAccount(ctx, req.(*ListAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _SiteAdminService_GetAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAccountRequire)
+	in := new(GetAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -179,7 +179,7 @@ func _SiteAdminService_GetAccount_Handler(srv interface{}, ctx context.Context, 
 		FullMethod: "/bookkeepingo.mizumoto.tech.site.interface.v1.SiteAdminService/GetAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SiteAdminServiceServer).GetAccount(ctx, req.(*GetAccountRequire))
+		return srv.(SiteAdminServiceServer).GetAccount(ctx, req.(*GetAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

@@ -92,7 +92,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1LoginRequire"
+              "$ref": "#/definitions/v1LoginRequest"
             }
           }
         ],
@@ -124,7 +124,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1LogoutRequire"
+              "$ref": "#/definitions/v1LogoutRequest"
             }
           }
         ],
@@ -169,7 +169,7 @@
           "type": "string",
           "format": "int64"
         },
-        "accountname": {
+        "accountMail": {
           "type": "string"
         }
       }
@@ -177,10 +177,10 @@
     "v1ListAccountResponse": {
       "type": "object"
     },
-    "v1LoginRequire": {
+    "v1LoginRequest": {
       "type": "object",
       "properties": {
-        "accountname": {
+        "accountMail": {
           "type": "string"
         },
         "password": {
@@ -196,7 +196,7 @@
         }
       }
     },
-    "v1LogoutRequire": {
+    "v1LogoutRequest": {
       "type": "object"
     },
     "v1LogoutResponse": {

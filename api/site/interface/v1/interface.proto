@@ -7,35 +7,35 @@ import "google/api/annotations.proto";
 option go_package = "github.com/mizumoto-cn/bookkeepingo/api/site/interface/v1;v1";
 
 service SiteAdminService {
-    rpc Login (LoginRequire) returns (LoginResponse) {
+    rpc Login (LoginRequest) returns (LoginResponse) {
         option (google.api.http) = {
             post: "/v1/login"
             body: "*"
         };
     }
 
-    rpc Logout (LogoutRequire) returns (LogoutResponse) {
+    rpc Logout (LogoutRequest) returns (LogoutResponse) {
         option (google.api.http) = {
             post: "/v1/logout"
             body: "*"
         };
     }
 
-    rpc ListAccount (ListAccountRequire) returns (ListAccountResponse) {
+    rpc ListAccount (ListAccountRequest) returns (ListAccountResponse) {
         option (google.api.http) = {
             get: "/v1/accounts"
         };
     }
 
-    rpc GetAccount (GetAccountRequire) returns (GetAccountResponse) {
+    rpc GetAccount (GetAccountRequest) returns (GetAccountResponse) {
         option (google.api.http) = {
             get: "/v1/accounts/{id}"
         };
     }
 }
 
-message RegisterRequire {
-    string accountname = 1;
+message RegisterRequest {
+    string account_mail = 1;
     string password = 2;
 }
 
@@ -43,8 +43,8 @@ message RegisterResponse {
     int64 id = 1;
 }
 
-message LoginRequire {
-    string accountname = 1;
+message LoginRequest {
+    string account_mail = 1;
     string password = 2;
 }
 
@@ -52,7 +52,7 @@ message LoginResponse {
     string token = 1;
 }
 
-message LogoutRequire {
+message LogoutRequest {
 
 }
 
@@ -60,17 +60,17 @@ message LogoutResponse {
 
 }
 
-message GetAccountRequire {
+message GetAccountRequest {
     int64 id = 1;
 }
 
 message GetAccountResponse {
     int64 id = 1;
-    string accountname = 2;
+    string account_mail = 2;
 }
 
 
-message ListAccountRequire {
+message ListAccountRequest {
 
 }
 
@@ -78,18 +78,18 @@ message ListAccountResponse {
 
 }
 
-message CreateAccountRequire {
-    string accountname = 1;
+message CreateAccountRequest {
+    string account_mail = 1;
     string password = 2;
 }
 
 message CreateAccountResponse {
     int64 id = 1;
-    string accountname = 2;
+    string account_mail = 2;
 }
 
-message VerifyPasswordRequire {
-    string accountname = 1;
+message VerifyPasswordRequest {
+    string account_mail = 1;
     string password = 2;
 }
 

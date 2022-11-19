@@ -9,11 +9,11 @@ import (
 	"flag"
 	"os"
 
-	"github.com/mizumoto-cn/bookkeepingo/app/site/interface/interface/internal/biz"
-	"github.com/mizumoto-cn/bookkeepingo/app/site/interface/interface/internal/conf"
-	"github.com/mizumoto-cn/bookkeepingo/app/site/interface/interface/internal/data"
-	"github.com/mizumoto-cn/bookkeepingo/app/site/interface/interface/internal/server"
-	"github.com/mizumoto-cn/bookkeepingo/app/site/interface/interface/internal/service"
+	"github.com/mizumoto-cn/bookkeepingo/app/site/interface/internal/biz"
+	"github.com/mizumoto-cn/bookkeepingo/app/site/interface/internal/conf"
+	"github.com/mizumoto-cn/bookkeepingo/app/site/interface/internal/data"
+	"github.com/mizumoto-cn/bookkeepingo/app/site/interface/internal/server"
+	"github.com/mizumoto-cn/bookkeepingo/app/site/interface/internal/service"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
